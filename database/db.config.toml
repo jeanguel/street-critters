@@ -1,0 +1,7 @@
+core = [
+  'scripts/reset.sql',
+
+  'tables/report/record.sql',
+
+  'functions/report/create_record_entry.sql'
+]
