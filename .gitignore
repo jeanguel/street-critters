@@ -13,3 +13,14 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Log files or log directory
+log/
+logs/
+*.log
+
+# Main configuration file
+/*.config.toml
+
+# Generated executable
+/street-critters
