@@ -1,0 +1,32 @@
+# Settings related to how the application runs
+[application]
+  # Specifies how the application will run
+  # Has a value of either 'development' or 'production'
+  environment = "development"  # Required
+
+  # Directory where log files will be placed
+  # Has a path string type
+  log-directory = "./logs"  # Required
+
+# Settings related to how the API server is served
+[api-server]
+  # Hostname for the API server
+  # Has a IP address string type or domain string type
+  host = "127.0.0.1"  # Required
+
+  # Indicates which port the API server is served
+  # Has an integer type
+  port = 8800  # Required only when the environment is in 'development' mode
+
+# Database connectivity settings
+[database]
+  # Connection string to the PostgreSQL database. Note that special characters
+  #  such as '#', ':', and '@' in the password needs to be percent-encoded
+  # Has a URI string type
+  psql-connection-string = ""  # Required
+
+  # TLS Certificate for the PostgreSQL database. Uncomment the variable
+  #  if the connection string requires a TLS certificate to connect to
+  #  the PostgreSQL database instance.
+  # Has a path string type
+  #tls-cert = ""  # Optional

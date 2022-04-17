@@ -1,0 +1,22 @@
+[Unit]
+Description=Street Critters API
+Documentation=https://github.com/jeanguel/street-critters
+AssertFileIsExecutable=
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=
+WorkingDirectory=
+User=
+Group=
+PermissionsStartOnly=true
+
+Restart=on-failure
+StandardOutput=journal
+StandardError=inherit
+TimeoutStopSec=5
+KillSignal=INT
+SendSIGKILL=yes
+SuccessExitStatus=0
