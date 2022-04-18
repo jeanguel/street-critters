@@ -1,11 +1,13 @@
 package config
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"time"
 
 	rotatelogs "github.com/lestrrat/go-file-rotatelogs"
@@ -46,6 +48,19 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 		logEntry := fmt.Sprintf("%s -> %s %s ", r.RemoteAddr, r.Method, r.URL.String())
 
 		lrw := &logResponseWriter{w, http.StatusOK}
+		defer func() {
+			if err := recover(); err != nil {
+				lrw.Header().Set("Content-Type", "application/json")
+				lrw.WriteHeader(500)
+				json.NewEncoder(lrw).Encode(struct {
+					M string `json:"message"`
+				}{"Internal server error"})
+
+				logEntry += "500: " + string(debug.Stack())
+				MainLogger.Error.Println(logEntry)
+			}
+		}()
+
 		next.ServeHTTP(lrw, r)
 
 		logEntry += fmt.Sprint(lrw.statusCode)
