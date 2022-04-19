@@ -9,7 +9,7 @@ import (
 )
 
 // Router routes endpoint requests to their designated functions
-var Router *mux.Router
+var Router *mux.Router = mux.NewRouter().StrictSlash(true)
 
 // CreateHTTPServer applies the functions to their
 func CreateHTTPServer() http.Server {

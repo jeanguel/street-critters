@@ -6,12 +6,16 @@ import (
 	"os/signal"
 
 	"github.com/jeanguel/street-critters/api/config"
+	"github.com/jeanguel/street-critters/api/controllers"
 )
 
 func main() {
 	config.InitializeApplication()
 
+	controllers.ApplyRoutes()
 	server := config.CreateHTTPServer()
+
+	config.MainLogger.Info.Println("Starting server")
 	defer func() {
 		config.MainLogger.Info.Println("Server shutting down")
 

@@ -1,5 +1,6 @@
 package config
 
+// InitializeApplication
 func InitializeApplication() {
 	readConfigFile()
 
@@ -7,6 +8,7 @@ func InitializeApplication() {
 	initializeDBCerts()
 }
 
+// CloseApplication
 func CloseApplication() {
 	closeLogger()
 }
