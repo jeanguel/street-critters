@@ -13,7 +13,7 @@ $func$
 DECLARE
   v_created_record_id BIGINT := 0;
   v_success BOOLEAN := TRUE;
-  v_message TEXT := '';
+  v_message TEXT := 'Record created';
 BEGIN
   INSERT INTO report.record (
     record_reference_id,
@@ -27,7 +27,7 @@ BEGIN
     p_record_notes,
     p_record_geo_point,
     p_record_address
-  );
+  ) RETURNING record_id INTO v_created_record_id;
 
   RETURN QUERY SELECT v_created_record_id, v_success, v_message;
 END;
