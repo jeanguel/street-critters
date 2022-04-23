@@ -6,6 +6,7 @@ import (
 	"github.com/jeanguel/street-critters/api/config"
 	"github.com/jeanguel/street-critters/api/models"
 	"github.com/jeanguel/street-critters/api/repositories"
+	"github.com/jeanguel/street-critters/api/utils"
 )
 
 // GetRecords
@@ -33,8 +34,16 @@ func CreateNewRecord(w http.ResponseWriter, r *http.Request) (int, interface{}) 
 		return 400, models.BaseAPIResponse{Message: err.Error()}
 	}
 
-	// TODO: Must get the address via OpenStreetMaps geopoint
-	recordSchema.Address = "Placeholder"
+	place, err := utils.GetPlaceFromGeocode(recordSchema.Geopoint[0], recordSchema.Geopoint[1])
+	if err != nil {
+		config.MainLogger.Warn.Printf(
+			"unable to retrieve place details, resorting to placeholder [%s]\n",
+			err.Error(),
+		)
+		recordSchema.Address = "Placeholder"
+	} else {
+		recordSchema.Address = place
+	}
 
 	record, err := recordSchema.ToModel()
 	if err != nil {
