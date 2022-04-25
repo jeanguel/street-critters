@@ -14,7 +14,7 @@ import (
 type RecordSchema struct {
 	Type     RecordType `json:"recordType"`
 	Notes    *string    `json:"notes"`
-	Geopoint []float64  `json:"geopoint" validate:"empty=false & eq=2"`
+	Geopoint [2]float64 `json:"geopoint" validate:"empty=false & eq=2"`
 	Address  string     `json:"address"`
 }
 
