@@ -11,13 +11,14 @@ import (
 )
 
 type Record struct {
-	ID          int64        `mapstructure:"record_id"`
-	ReferenceID string       `mapstructure:"record_reference_id"`
-	Type        RecordType   `mapstructure:"record_type"`
-	Notes       *string      `mapstructure:"record_notes"`
-	Geopoint    pgtype.Point `mapstructure:"record_geo_point"`
-	Address     string       `mapstructure:"record_address"`
-	CreatedAt   time.Time    `mapstructure:"created_at"`
+	ID            int64        `mapstructure:"record_id" json:"id"`
+	ReferenceID   string       `mapstructure:"record_reference_id" json:"referenceId"`
+	Type          RecordType   `mapstructure:"record_type" json:"type"`
+	Notes         *string      `mapstructure:"record_notes" json:"notes,omitempty"`
+	Geopoint      pgtype.Point `mapstructure:"record_geo_point" json:"-"`
+	FloatGeopoint [2]float64   `mapstructure:"-" json:"geopoint"`
+	Address       string       `mapstructure:"record_address" json:"address"`
+	CreatedAt     time.Time    `mapstructure:"created_at" json:"createdAt"`
 }
 
 // Save
