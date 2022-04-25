@@ -16,4 +16,9 @@ func ApplyRoutes() {
 		"/",
 		JSONRoute(CreateNewRecord),
 	).Methods("POST")
+
+	recordBlueprint.HandleFunc(
+		"/bounding-box/{startLong}/{startLat}/{endLong}/{endLat}",
+		JSONRoute(GetRecordsByBoundingBox),
+	).Methods("GET")
 }
