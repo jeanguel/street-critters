@@ -4,5 +4,6 @@ core = [
   'tables/report/record.sql',
 
   'functions/report/create_record_entry.sql',
-  'functions/report/get_all_records.sql'
+  'functions/report/get_all_records.sql',
+  'functions/report/get_records_by_bounding_box'
 ]
